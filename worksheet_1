@@ -24,3 +24,5 @@ p1 = Person("CR7")
 p2 = Person("CR7")
 print(id(p1) != id(p2)) #probably True
 print(id(Person) == id(Person())) # probably not true
+
+#Problem 5
