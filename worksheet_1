@@ -1,4 +1,5 @@
 from enum import Enum
+from itertools import product
 class Person:
     def __init__(self, name="Messi"):
         self.name = name
@@ -67,6 +68,29 @@ class PlayingCard:
             self.suit = suits.CLUBS.value            
         else:
             raise ValueError('ERROR. Suits can only be SPADES, HEARTS, DIAMONDS or CLUBS') 
-p1 = PlayingCard(4,'SPADES')
 
 
+#Problem 7
+class Player:
+    def __init__(self,name,hand):        
+        self.name = name
+        list_of_cards=[]
+        list_of_cards.append(hand)
+        self.hand = list_of_cards
+    def add_card(self,list_of_cards,card):
+         list_of_cards.append(card)
+         self.hand = list_of_cards
+
+class Deck:
+    def __init__(self):
+        ranks = range(2,15)
+        suits = ['SPADES','HEARTS','DIAMONDS','CLUBS']
+        card_combinations = list(product(ranks,suits))
+        self.cards = []
+        for card in card_combinations:
+            self.cards.append(PlayingCard(card[0],card[1]))     
+        
+
+p1 = Deck()
+
+print(len(p1.cards))
