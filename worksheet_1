@@ -1,3 +1,26 @@
 class Person:
     def __init__(self, name="Messi"):
         self.name = name
+
+#problem 1
+p = Person()
+print(p.name)
+
+#problem 2
+p = Person()
+p.name = "CR7"
+print(p.name)
+
+#problem 3
+p = Person("CR7")
+print(Person().name)
+
+#Problem 4
+print('starting problem 4')
+p1 = Person()
+p2 = Person()
+print(p1 is p2) #probably not True
+p1 = Person("CR7")
+p2 = Person("CR7")
+print(id(p1) != id(p2)) #probably True
+print(id(Person) == id(Person())) # probably not true
