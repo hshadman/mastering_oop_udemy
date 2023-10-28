@@ -1,3 +1,4 @@
+from enum import Enum
 class Person:
     def __init__(self, name="Messi"):
         self.name = name
@@ -26,3 +27,46 @@ print(id(p1) != id(p2)) #probably True
 print(id(Person) == id(Person())) # probably not true
 
 #Problem 5
+
+#brainstorming objects for the MaxHandWind capstone project
+#an object that maintains the remaining deck of cards
+#an object that identifies winner of a selected round
+#an object that randomly picks 3 cards from the deck for the three players
+#an object that keeps score of the players and eventually decides winner of the game
+
+#Problem 6
+
+class suits(Enum):
+      SPADES   = 3
+      HEARTS   = 2
+      DIAMONDS = 1
+      CLUBS    = 0
+
+class PlayingCard:
+    def __init__(self,rank,suit):
+        if rank in [i for i in range(2,15)]:
+            self.rank = rank
+        elif rank == 'Jack':
+	        self.rank = 11
+        elif rank == 'Queen':
+	        self.rank = 12
+        elif rank == 'King':
+    	    self.rank=13
+        elif rank == 'Ace':
+	        self.rank=14
+        else:
+            raise ValueError('ERROR. Ranks can range from 2 to 14 inclusive or be one of these choices: Jack, Queen, King or Ace')
+            
+        if suit == 'SPADES':
+            self.suit = suits.SPADES.value
+        elif suit == 'HEARTS':
+            self.suit = suits.HEARTS.value
+        elif suit == 'DIAMONDS':
+            self.suit = suits.DIAMONDS.value            
+        elif suit == 'CLUBS':
+            self.suit = suits.CLUBS.value            
+        else:
+            raise ValueError('ERROR. Suits can only be SPADES, HEARTS, DIAMONDS or CLUBS') 
+p1 = PlayingCard(4,'SPADES')
+
+
