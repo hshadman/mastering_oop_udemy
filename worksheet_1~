@@ -1,0 +1,12 @@
+class Person:
+    def __init__(self, name="Messi"):
+        self.name = name
+
+
+class PlayingCard:
+    def __init__(self,rank,suit):
+        return self
+    def rank(rank):
+        if rank in ['spades','hearts','diamonds','clubs']:
+            return self.rank
+    
