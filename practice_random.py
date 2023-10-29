@@ -1,12 +1,14 @@
-class Car:
-    def __init__(self,color,model,year):
-        self._color = color
-        self.__model = model
-        self.__year_ = year
+class Apple:
+    food_type = "fruit"
+    calories_per_100_gram = 50
+    def __init__(self, color, weight):
+        self.color = color
+        self.weight =weight
+    def get_calories(self):
+        return (self.weight/100)* self.calories_per_100_gram        
 
-c = Car("red", "Toyota", 2020)
+a1 = Apple('red', 100)
+a2 = Apple('green', 150)
 
-c._Car_color = "green"
-#c.__model = 'xyz'
-
-print(c._color, c._Car_color, c._Car__year_)
+print(f"Apple a1 has {a1.get_calories()} calories")
+print(f"Apple a2 has {a2.get_calories()} calories")
