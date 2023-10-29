@@ -1,73 +1,75 @@
 from enum import Enum
-from itertools import product
+import random
+
 
 #Problem 1
 
 #got those wrong. trailing underscore more than 2 prevents name mangling
 #you canc create new attributes for instances of a class
 
-#Problem 2
-class suits(Enum):
-      SPADES   = 3
-      HEARTS   = 2
-      DIAMONDS = 1
-      CLUBS    = 0
-
+class Suit(Enum):
+    SPADES = 4
+    HEARTS = 3
+    DIAMONDS = 2
+    CLUBS = 1
 class PlayingCard:
-    def __init__(self,rank,suit):
-        if rank in [i for i in range(2,15)]:
-            self._rank = rank
-        elif rank == 'Jack':
-	        self._rank = 11
-        elif rank == 'Queen':
-	        self._rank = 12
-        elif rank == 'King':
-    	    self._rank=13
-        elif rank == 'Ace':
-	        self._rank=14
-        else:
-            raise ValueError('ERROR. Ranks can range from 2 to 14 inclusive or be one of these choices: Jack, Queen, King or Ace')
-            
-        if suit == 'SPADES':
-            self._suit = suits.SPADES.value
-        elif suit == 'HEARTS':
-            self._suit = suits.HEARTS.value
-        elif suit == 'DIAMONDS':
-            self._suit = suits.DIAMONDS.value            
-        elif suit == 'CLUBS':
-            self._suit = suits.CLUBS.value            
-        else:
-            raise ValueError('ERROR. Suits can only be SPADES, HEARTS, DIAMONDS or CLUBS') 
+    def __init__(self, rank, suit):
+        self._rank = rank
+        self._suit = suit
     def get_rank(self):
-         return self._rank
+        return self._rank
     def get_suit(self):
-         return self._suit
-
+        return self._suit
 
 class Player:
-    def __init__(self,name,hand):        
+    def __init__(self,name):
         self._name = name
         self._hand = []
-    def set_hand(self, hand):
-        if (self._hand)>2:
-            raise ValueError('ERROR, more than 2 hands')
-        else:
-            return self._hand.append(hand)
     def get_name(self):
         return self._name
     def get_hand(self):
         return self._hand
-    def strongest_hand():
-        
+    def set_hand(hand):
+        # each hand is expected to be PlayingCard class instance
+        self._hand.append(hand)
+        if len(self._hand)>2:
+            raise ValueError('hands more than 2')
+        return print('the hand is now', self._hand)
+    def strongest_hand(self):
+        relative_rank = []
+        relative_suit = []
+        cards = []
+        for card in self.get_hand():
+            cards.append(card)
+            relative_rank.append(card.get_rank())
+            relative_suit.append(card.get_suit())
+        if relative_rank[0]>relative_rank[1]:
+            return cards[0]
+        elif relative_rank[0]<relative_rank[1]:
+            return cards[1]
+        elif relative_rank[0]==relative_rank[1]:
+            if relative_suit[0]>relative_suit[1]:
+                return cards[0]
+            elif relative[0]<relative_suit[1]:
+                return cards[1]
+            else:
+                raise ValueError('ERROR. something is wrong.')
 class Deck:
     def __init__(self):
-        ranks = range(2,15)
-        suits = ['SPADES','HEARTS','DIAMONDS','CLUBS']
-        card_combinations = list(product(ranks,suits))
         self._cards = []
-        for card in card_combinations:
-            self._cards.append(PlayingCard(card[0],card[1]))
+        for i in range(13):
+            self._cards.append(PlayingCard(i+2,Suit.SPADES))
+            self._cards.append(PlayingCard(i+2,Suit.DIAMONDS))
+            self._cards.append(PlayingCard(i+2,Suit.HEARTS))
+            self._cards.append(PlayingCard(i+2,Suit.CLUBS))
     def get_cards(self):
-         return self._cards
+        return self._cards
+    def shuffle(self):
+        current_cards = self.get_cards()
+        current_cards_indices = [i for i in range(0,len(current_cards))]
+        random.shuffle(current_cards_indices)
+        shuffled_deck = [current_cards[index] for index in current_cards_indices]
+        return shuffled_deck
 
-#Problem 3
+    
+#problem 5
