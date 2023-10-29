@@ -69,7 +69,22 @@ class Deck:
         current_cards_indices = [i for i in range(0,len(current_cards))]
         random.shuffle(current_cards_indices)
         shuffled_deck = [current_cards[index] for index in current_cards_indices]
+        self._cards = shuffled_deck
         return shuffled_deck
+    def draw(self,n):
+        current_cards = self.get_cards()
+        if len(current_cards)<n:
+            return print('None')
+        else:
+            j=1
+            drawn_cards = []
+            for card_iter in range(n):
+                drawn_cards.append(current_cards[(-1)*j])
+                j += 1    
+            updated_deck = [card for card in current_cards if card not in drawn_cards]
+            self._cards = updated_deck
+            return drawn_cards
+
 
     
 #problem 5
