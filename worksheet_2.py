@@ -29,9 +29,9 @@ class Player:
         return self._name
     def get_hand(self):
         return self._hand
-    def set_hand(hand):
+    def set_hand(self, hand):
         # each hand is expected to be PlayingCard class instance
-        self._hand.append(hand)
+        self._hand = hand
         if len(self._hand)>2:
             raise ValueError('hands more than 2')
         return print('the hand is now', self._hand)
