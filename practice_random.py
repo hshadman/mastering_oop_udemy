@@ -1,18 +1,17 @@
-class Apple:
-    food_type = "fruit"
-    calories = 50
-    def __init__(self, color, weight):
-        self.color = color
-        self.weight = weight
+class Student:
+    def __init__(self, first_name,last_name):
+        self.first_name = first_name
+        self.last_name = last_name
+    @classmethod
+    def from_fullname(cls,full_name):
+        first, last = full_name.split(" ")
+        cls(first,last) #equivalent to Student(first,last) cls is actually class
+        return cls(first, last)
+s1 = Student("Alex", "Baldwin")
+print(s1.first_name,s1.last_name)
+#python allows method overwriting, not overloading, unlike C++
 
-    def set_color(self, color):
-        print(f'self has id {id(self)}')
-        print(f'class of self has id {id(self.__class__)}')
-        #self.color = color
-        self.__class__.food_type = "sweet fruit"
-a = Apple("red", 100)
-print(f'id of instance a is {id(a)}')
-print(f'id of class Apple is {id(Apple)}')
-
-a.set_color("green")
-print(a.food_type)
+s2 = Student.from_fullname ("Tom Hanks")
+print(type(s2))
+print(s2.first_name)
+print(s2.last_name)
