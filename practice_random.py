@@ -7,6 +7,10 @@ class Student:
         first, last = full_name.split(" ")
         cls(first,last) #equivalent to Student(first,last) cls is actually class
         return cls(first, last)
+    @classmethod
+    def from_json(cls, json):
+        #process input
+        return cls(first, last)
 s1 = Student("Alex", "Baldwin")
 print(s1.first_name,s1.last_name)
 #python allows method overwriting, not overloading, unlike C++
