@@ -1,5 +1,6 @@
 from enum import Enum
 import random
+import numpy as np
 
 #Problem 1
 #explain the differences between the attributes firstname, lastname and job. 
@@ -100,25 +101,64 @@ class Deck:
 
 
 class Game:
+    
+    deck = Deck()
     def __init__(self, players):
         #assuming 3 players
         self.players = players #list of players in the game
-        self.scores = [0,0,0]
+        self.scores = list(np.zeros(len(players)))
     
-    def deck(self):
-        #supposed to be an instance of the Deck class
-        self.deck = Deck()
-    def score(n1,n2,n3):
+    def score(self, index, score):
         #has to be in order of players
-        self.scores[0] = self.scores[0] + n1
-        self.scores[1] = self.scores[1] + n2
-        self.scores[2] = self.scores[2] + n3
-    
+        self.scores[index] = self.scores[index] + score
+
     def show_score(self):
         for player in self.players:
             print(f'Player {player} has score {self.scores[self.players.index(player)]}')
         return            
     
     def play_round(self):
-        start_deck = deck(Deck)
+        #assuming 3 players in this game
+        if len(self.players!=3):
+            raise ValueError('expected 3 players in game')
+        #each element or 'player' in the self.players list is an instance of Player() class
+        all_strongest=[]
+        for player in self.players:
+            player.set_hand(deck.draw(2))
+            all_strongest.append(player.strongest_hand())
+            deck.shuffle()
+        #now to find the strongest overall
+        relative_rank = []
+        relative_suit = []
+        cards = []
+        for card in all_strongest:
+            cards.append(card)
+            relative_rank.append(card.get_rank())
+            relative_suit.append(card.get_suit())
+
+        relative_rank = np.array(relative_rank)            
+        relative_suit = np.array(relative_suit)            
+        if np.unique(relative_rank).shape[0]==relative_rank.shape[0]:
+            winning_card = np.where(relative_rank == max(relative_rank))[0][0]
+            Game.score(winning_card,1)
+            return 
+        elif np.unique(relative_rank).shape[0]<relative_rank.shape[0] and np.unique(relative_rank).shape[0]>0:
+            u1,c1 = np.unique(relative_rank,return_counts=True)
+            non_uniq1 = u1[c1>1]
+            uniq1 = u1[c1==1]
+            if len(non_uniq)!=1:
+                raise ValueError('something is wrong')
+            if 
+            return cards[1]
+        elif relative_rank[0]==relative_rank[1]:
+            if relative_suit[0]>relative_suit[1]:
+                return cards[0]
+            elif relative[0]<relative_suit[1]:
+                return cards[1]
+            else:
+                raise ValueError('ERROR. something is wrong.')        
+
+
+        
+
 
