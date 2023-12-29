@@ -142,13 +142,21 @@ class Game:
             winning_card = np.where(relative_rank == max(relative_rank))[0][0]
             Game.score(winning_card,1)
             return 
-        elif np.unique(relative_rank).shape[0]<relative_rank.shape[0] and np.unique(relative_rank).shape[0]>0:
+        elif np.unique(relative_rank).shape[0]<relative_rank.shape[0] and np.unique(relative_rank).shape[0]>1:
             u1,c1 = np.unique(relative_rank,return_counts=True)
             non_uniq1 = u1[c1>1]
             uniq1 = u1[c1==1]
             if len(non_uniq)!=1:
                 raise ValueError('something is wrong')
-            if 
+            if uniq1[0]>non_uniq1[0]:
+                winning_card = uniq1[0]
+                Game.score(winning_card,1)
+                return
+            elif uniq1[0]<non_uniq1[0]:
+                non_uniq1_suits = relative_suit[np.where(relative_rank == non_uniq1[0])]
+                winning_card = np.where(relative_suit == max(non_uniq1_suits))[0][0]
+                Game.score(winning_card,1)
+                return
             return cards[1]
         elif relative_rank[0]==relative_rank[1]:
             if relative_suit[0]>relative_suit[1]:
