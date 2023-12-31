@@ -115,59 +115,33 @@ class Game:
     def show_score(self):
         print("Score:")
         print("-----")
-
         for k, v in self._score.items():
             print(f'{k}: {v}')
         print('\n')
         
     
     def play_round(self):
-        #assuming 3 players in this game
-        if len(self.players!=3):
-            raise ValueError('expected 3 players in game')
-        #each element or 'player' in the self.players list is an instance of Player() class
-        all_strongest=[]
-        for player in self.players:
-            player.set_hand(deck.draw(2))
-            all_strongest.append(player.strongest_hand())
-            deck.shuffle()
-        #now to find the strongest overall
-        relative_rank = []
-        relative_suit = []
-        cards = []
-        for card in all_strongest:
-            cards.append(card)
-            relative_rank.append(card.get_rank())
-            relative_suit.append(card.get_suit())
+        winning_card = None
+        winning_player = None
+        for p in self._players:
+            hand = self._deck.draw(2)
+            p.set_hand(hand)
+            print(f'player {p.get_name()} is dealt [{hand[0]},
+                  {hand[1]}]')
+            if winning_card is None or (
+                p.strongest_card().get_rank() > winning_card.get_rank()
+            ) or (
+                (p.strongest_card().get_rank() == winning_card.get_rank())
+                and (p.strongest_card().get_suit().value > winning_card.get_suit().value)
+            ):
+                winning_card = p.strongest_card()
+                winning_player = p
+        print(f'PLAYER {winning_player.get_name()} WINS THIS ROUND\n')
+        self._score[winning_player.get_name()] += 1
+        self.show_score()
 
-        relative_rank = np.array(relative_rank)            
-        relative_suit = np.array(relative_suit)            
-        if np.unique(relative_rank).shape[0]==relative_rank.shape[0]:
-            winning_card = np.where(relative_rank == max(relative_rank))[0][0]
-            Game.score(winning_card,1)
-            return 
-        elif np.unique(relative_rank).shape[0]<relative_rank.shape[0] and np.unique(relative_rank).shape[0]>1:
-            u1,c1 = np.unique(relative_rank,return_counts=True)
-            non_uniq1 = u1[c1>1]
-            uniq1 = u1[c1==1]
-            if len(non_uniq)!=1:
-                raise ValueError('something is wrong')
-            if uniq1[0]>non_uniq1[0]:
-                winning_card = uniq1[0]
-                Game.score(winning_card,1)
-                return
-            elif uniq1[0]<non_uniq1[0]:
-                non_uniq1_suits = relative_suit[np.where(relative_rank == non_uniq1[0])]
-                winning_card = np.where(relative_suit == max(non_uniq1_suits))[0][0]
-                Game.score(winning_card,1)
-                return
-        elif np.unique(relative_rank).shape[0] == 1:
-            winning_card = np.where(relative_suit == max(relative_suit))[0][0]
-            Game.score(winning_card,1)
-            return 
-        else:
-            raise ValueError('ERROR. something is wrong.')        
 
+        
 
         
 
