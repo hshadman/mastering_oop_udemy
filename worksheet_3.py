@@ -111,14 +111,15 @@ class Game:
         # initialize the scores to zeros
         for p in players:
             self._score[p.get_name()] = 0
-    def score(self, index, score):
-        #has to be in order of players
-        self.scores[index] = self.scores[index] + score
 
     def show_score(self):
-        for player in self.players:
-            print(f'Player {player} has score {self.scores[self.players.index(player)]}')
-        return            
+        print("Score:")
+        print("-----")
+
+        for k, v in self._score.items():
+            print(f'{k}: {v}')
+        print('\n')
+        
     
     def play_round(self):
         #assuming 3 players in this game
