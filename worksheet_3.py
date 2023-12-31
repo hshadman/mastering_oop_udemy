@@ -102,12 +102,15 @@ class Deck:
 
 class Game:
     
-    deck = Deck()
-    def __init__(self, players):
-        #assuming 3 players
-        self.players = players #list of players in the game
-        self.scores = list(np.zeros(len(players)))
     
+    def __init__(self, players, deck):
+        #assuming 3 players
+        self._players = players #list of players in the game
+        self._scores = {}
+        self._deck = deck
+        # initialize the scores to zeros
+        for p in players:
+            self._score[p.get_name()] = 0
     def score(self, index, score):
         #has to be in order of players
         self.scores[index] = self.scores[index] + score
@@ -157,14 +160,12 @@ class Game:
                 winning_card = np.where(relative_suit == max(non_uniq1_suits))[0][0]
                 Game.score(winning_card,1)
                 return
-            return cards[1]
-        elif relative_rank[0]==relative_rank[1]:
-            if relative_suit[0]>relative_suit[1]:
-                return cards[0]
-            elif relative[0]<relative_suit[1]:
-                return cards[1]
-            else:
-                raise ValueError('ERROR. something is wrong.')        
+        elif np.unique(relative_rank).shape[0] == 1:
+            winning_card = np.where(relative_suit == max(relative_suit))[0][0]
+            Game.score(winning_card,1)
+            return 
+        else:
+            raise ValueError('ERROR. something is wrong.')        
 
 
         
