@@ -59,7 +59,13 @@ class Player:
 #cheater class only changing the strongest hand
     class Cheater(Player):
         def strongest_hand(self):
-            
+            relative_rank = []
+            relative_suit = []
+            cards = []
+            for card in self.get_hand():
+                cards.append(card)
+                relative_rank.append(card.get_rank())
+                relative_suit.append(card.get_suit())            
 
 
 class Deck:
