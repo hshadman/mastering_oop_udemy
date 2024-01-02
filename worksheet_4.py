@@ -1,9 +1,7 @@
+from itertools import product
 from enum import Enum
 import random
 import numpy as np
-
-
-
 
 #classes already created
 class Suit(Enum):
@@ -59,13 +57,13 @@ class Player:
 #cheater class only changing the strongest hand
     class Cheater(Player):
         def strongest_hand(self):
-            relative_rank = []
-            relative_suit = []
-            cards = []
-            for card in self.get_hand():
-                cards.append(card)
-                relative_rank.append(card.get_rank())
-                relative_suit.append(card.get_suit())            
+            relative_rank = [2,3,4,5,6,7,8,9,10,11,12,13,14]
+            relative_suit = [1,2,3,4]
+            card = list(product(relative_suit,relative_rank))
+            for extra_card in range(10):
+                card.append((4,14))
+            return card[random.randint(0,len(card)-1)]
+            
 
 
 class Deck:
