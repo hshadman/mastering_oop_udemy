@@ -27,6 +27,11 @@ class PlayingCard:
             return self.get_rank() > other.get_rank() 
         else:
             return self.get_suit() > other.get_suit()
+    def __lt__(self, other):
+        if self.get_rank()!=other.get_rank():
+            return self.get_rank() < other.get_rank() 
+        else:
+            return self.get_suit() < other.get_suit()    
 
 
 class Player:
