@@ -47,7 +47,7 @@ class Player:
         self._hand = hand
         if len(self._hand)>2:
             raise ValueError('hands more than 2')
-        return print('the hand is now', print(self._hand))
+        
     def strongest_card(self):
         if self.get_hand()[0] > self.get_hand()[1]:
             return self.get_hand()[0]
