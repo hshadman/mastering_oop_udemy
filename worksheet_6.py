@@ -59,7 +59,7 @@ class Player:
 #cheater class is an inheritance of player class
 #cheater class only changing the strongest hand
 class Cheater(Player):
-    def strongest_hand(self):
+    def strongest_card(self):
         if random.randint(1,10)<=2:
             return PlayingCard(14,Suit.SPADES)
         else:
