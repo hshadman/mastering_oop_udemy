@@ -1,6 +1,7 @@
 from enum import Enum
 import random
 import numpy as np
+import time
 
 #classes already created
 class Suit(Enum):
@@ -19,17 +20,17 @@ class PlayingCard:
     def get_suit(self):
         return self._suit
     def __eq__(self, other):
-        return self.get_rank() == other.get_rank() and self.get_suit() == other.get_suit()
+        return self.get_rank() == other.get_rank() and self.get_suit().value == other.get_suit().value
     def __gt__(self, other):
         if self.get_rank()!=other.get_rank():
             return self.get_rank() > other.get_rank() 
         else:
-            return self.get_suit() > other.get_suit()
+            return self.get_suit().value > other.get_suit().value
     def __lt__(self, other):
         if self.get_rank()!=other.get_rank():
             return self.get_rank() < other.get_rank() 
         else:
-            return self.get_suit() < other.get_suit()    
+            return self.get_suit().value < other.get_suit().value    
     def __str__(self):
         return f"({self.get_rank()},{str(self.get_suit().name)})"
 
@@ -47,7 +48,7 @@ class Player:
         if len(self._hand)>2:
             raise ValueError('hands more than 2')
         return print('the hand is now', self._hand)
-    def strongest_hand(self):
+    def strongest_card(self):
         if self.get_hand()[0] > self.get_hand()[1]:
             return self.get_hand()[0]
         elif self.get_hand()[1] > self.get_hand()[0]:
@@ -100,7 +101,7 @@ class Game:
     def __init__(self, players, deck):
         #assuming 3 players
         self._players = players #list of players in the game
-        self._scores = {}
+        self._score = {}
         self._deck = deck
         # initialize the scores to zeros
         for p in players:
@@ -132,11 +133,26 @@ class Game:
         print(f'PLAYER {winning_player.get_name()} WINS THIS ROUND\n')
         self._score[winning_player.get_name()] += 1
         self.show_score()
+        time.sleep(15)
     def play(self):
         if len(self._deck.get_cards()) >= (2 * len(self._players)):
             self.__play_round()
+
         else:
             print('deck is empty')
 
-        
+def main():
+    p1 = Player('Bob')
+    p2 = Player('John')
+    p3 = Player('Hossain')
+    d1 = Deck()
+
+    d1.shuffle()
+
+    G = Game([p1,p2,p3], d1)
+
+    G.play()
+    return
+
+main()
 
