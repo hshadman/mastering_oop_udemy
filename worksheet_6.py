@@ -133,7 +133,7 @@ class Game:
         print(f'PLAYER {winning_player.get_name()} WINS THIS ROUND\n')
         self._score[winning_player.get_name()] += 1
         self.show_score()
-        time.sleep(15)
+        time.sleep(5)
     def play(self):
         round = 0
         while len(self._deck.get_cards()) >= (2 * len(self._players)):
@@ -147,7 +147,7 @@ class Game:
 def main():
     p1 = Player('Bob')
     p2 = Player('John')
-    p3 = Player('Hossain')
+    p3 = Cheater('Hossain')
     d1 = Deck()
 
     d1.shuffle()
