@@ -1,7 +1,7 @@
 from enum import Enum
 import random
 import numpy as np
-from functools import total_ordering
+#from functools import total_ordering
 
 #classes already created
 class Suit(Enum):
@@ -11,7 +11,7 @@ class Suit(Enum):
     CLUBS = 1    
 
 #problem 1 modification 
-@total_ordering
+
 class PlayingCard:
     def __init__(self, rank, suit):
         self._rank = rank
@@ -23,7 +23,7 @@ class PlayingCard:
     def __eq__(self, other):
         return self.get_rank() == other.get_rank() and self.get_suit() == other.get_suit()
     def __gt__(self, other):
-        return self.get_rank() > other.get_rank() and self.get_suit() > other.get_suit()
+        return self.get_rank() > other.get_rank() 
 
 
 class Player:
