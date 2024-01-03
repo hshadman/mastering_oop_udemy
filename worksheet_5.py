@@ -23,7 +23,10 @@ class PlayingCard:
     def __eq__(self, other):
         return self.get_rank() == other.get_rank() and self.get_suit() == other.get_suit()
     def __gt__(self, other):
-        return self.get_rank() > other.get_rank() 
+        if self.get_rank()!=other.get_rank():
+            return self.get_rank() > other.get_rank() 
+        else:
+            return self.get_suit() > other.get_suit()
 
 
 class Player:
