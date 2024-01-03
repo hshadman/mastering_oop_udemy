@@ -32,6 +32,7 @@ class PlayingCard:
             return self.get_suit() < other.get_suit()    
     def __str__(self):
         return f"({self.get_rank()},{str(self.get_suit().name)})"
+
 class Player:
     def __init__(self,name):
         self._name = name
@@ -119,8 +120,7 @@ class Game:
         for p in self._players:
             hand = self._deck.draw(2)
             p.set_hand(hand)
-            print(f'player {p.get_name()} is dealt [{hand[0]},
-                  {hand[1]}]')
+            print(f'player {p.get_name()} is dealt [{hand[0]},{hand[1]}]')
             if winning_card is None or (
                 p.strongest_card().get_rank() > winning_card.get_rank()
             ) or (
@@ -133,9 +133,10 @@ class Game:
         self._score[winning_player.get_name()] += 1
         self.show_score()
     def play(self):
-        #method doesn't return anything
-
-
+        if len(self._deck.get_cards()) >= (2 * len(self._players)):
+            self.__play_round()
+        else:
+            print('deck is empty')
 
         
 
