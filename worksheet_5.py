@@ -31,6 +31,8 @@ class PlayingCard:
             return self.get_rank() < other.get_rank() 
         else:
             return self.get_suit() < other.get_suit()    
+    def __str__(self):
+        return f"({self.get_rank()},{str(self.get_suit()).split('.')[1]})"
 
 #problem 3
 card = PlayingCard(9, Suit.SPADES)
