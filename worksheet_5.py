@@ -11,7 +11,6 @@ class Suit(Enum):
     CLUBS = 1    
 
 #problem 1 modification 
-
 class PlayingCard:
     def __init__(self, rank, suit):
         self._rank = rank
@@ -33,7 +32,7 @@ class PlayingCard:
         else:
             return self.get_suit() < other.get_suit()    
 
-
+#problem 2 modification
 class Player:
     def __init__(self,name):
         self._name = name
@@ -49,24 +48,12 @@ class Player:
             raise ValueError('hands more than 2')
         return print('the hand is now', self._hand)
     def strongest_hand(self):
-        relative_rank = []
-        relative_suit = []
-        cards = []
-        for card in self.get_hand():
-            cards.append(card)
-            relative_rank.append(card.get_rank())
-            relative_suit.append(card.get_suit())
-        if relative_rank[0]>relative_rank[1]:
-            return cards[0]
-        elif relative_rank[0]<relative_rank[1]:
-            return cards[1]
-        elif relative_rank[0]==relative_rank[1]:
-            if relative_suit[0]>relative_suit[1]:
-                return cards[0]
-            elif relative[0]<relative_suit[1]:
-                return cards[1]
-            else:
-                raise ValueError('ERROR. something is wrong.')
+        if self.get_hand()[0] > self.get_hand()[1]:
+            return self.get_hand()[0]
+        elif self.get_hand()[1] > self.get_hand()[0]:
+            return self.get_hand()[1]
+        else:
+            return print('there is a problem')
 
 #cheater class is an inheritance of player class
 #cheater class only changing the strongest hand
