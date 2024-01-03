@@ -32,6 +32,10 @@ class PlayingCard:
         else:
             return self.get_suit() < other.get_suit()    
 
+#problem 3
+card = PlayingCard(9, Suit.SPADES)
+print(card)
+
 #problem 2 modification
 class Player:
     def __init__(self,name):
