@@ -135,7 +135,8 @@ class Game:
         self.show_score()
         time.sleep(15)
     def play(self):
-        if len(self._deck.get_cards()) >= (2 * len(self._players)):
+        
+        while len(self._deck.get_cards()) >= (2 * len(self._players)):
             self.__play_round()
 
         else:
