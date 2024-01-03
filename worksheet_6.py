@@ -135,9 +135,11 @@ class Game:
         self.show_score()
         time.sleep(15)
     def play(self):
-        
+        round = 0
         while len(self._deck.get_cards()) >= (2 * len(self._players)):
             self.__play_round()
+            round += 1
+            print(f'Round {round} completed')
 
         else:
             print('deck is empty')
